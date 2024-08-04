@@ -16,7 +16,7 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Override
-    public void debit(Long userId, Integer money) {
+    public void debit(Long userId, Long money) {
         log.info("start account service xid:{}", RootContext.getXID());
         Account account = accountRepository.findAccountByUserId(userId);
         if (account.getMoney() < money) {

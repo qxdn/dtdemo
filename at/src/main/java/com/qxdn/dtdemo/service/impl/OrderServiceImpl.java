@@ -22,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void createOrder(Long userId, Long itemId, Integer count) {
         log.info("start order service xid:{}", RootContext.getXID());
-        Integer amount = calculateAmount(itemId, count);
+        Long amount = calculateAmount(itemId, count);
 
         accountService.debit(userId, amount);
 
@@ -35,8 +35,8 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
 
-    private Integer calculateAmount(Long itemId, Integer count) {
+    private Long calculateAmount(Long itemId, Integer count) {
         // calculate amount
-        return count * 100;
+        return count * 100L;
     }
 }

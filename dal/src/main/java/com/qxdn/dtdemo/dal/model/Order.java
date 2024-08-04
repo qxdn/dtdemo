@@ -15,5 +15,5 @@ public class Order extends BaseModel{
 
     private Integer count;
 
-    private Integer amount;
+    private Long amount;
 }

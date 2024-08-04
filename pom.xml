@@ -25,6 +25,7 @@
         <module>xa</module>
         <module>at</module>
         <module>dal</module>
+        <module>tcc</module>
     </modules>
     <scm>
         <connection/>

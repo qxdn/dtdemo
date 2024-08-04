@@ -11,5 +11,10 @@ public class Account extends BaseModel {
 
     private Long userId;
 
-    private Long money;
+    private Long money = 0L;
+
+    /**
+     * 用于事务预留
+     */
+    private Long transactionalMoney = 0L;
 }
