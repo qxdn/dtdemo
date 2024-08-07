@@ -1,11 +1,12 @@
-package com.qxdn.dtdemo.xa;
+package com.qxdn.dtdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class XADemoApplication {
+public class XADemoBusinessApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(XADemoApplication.class, args);
+        SpringApplication.run(XADemoBusinessApplication.class, args);
     }
 }
