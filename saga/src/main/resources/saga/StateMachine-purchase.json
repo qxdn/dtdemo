@@ -1,0 +1,484 @@
+{
+  "Name": "StateMachine-purchase",
+  "Comment": "This state machine is modeled by designer tools.",
+  "Version": "0.0.1",
+  "style": {
+    "bounds": {
+      "x": 362,
+      "y": 42,
+      "width": 36,
+      "height": 36
+    }
+  },
+  "States": {
+    "ServiceTask-ReduceItem": {
+      "style": {
+        "bounds": {
+          "x": 330,
+          "y": 110,
+          "width": 100,
+          "height": 80
+        }
+      },
+      "Name": "ServiceTask-ReduceItem",
+      "IsForCompensation": false,
+      "Input": [
+        "$.[businessKey]",
+        "$.[itemId]",
+        "$.[count]"
+      ],
+      "Output": {},
+      "Status": {},
+      "Retry": [],
+      "ServiceName": "itemAction",
+      "ServiceMethod": "decreaseStock",
+      "Catch": [
+        {
+          "Exceptions": [
+            "java.lang.Throwable"
+          ],
+          "Next": "CompensationTrigger-jykd7ys"
+        }
+      ],
+      "CompensateState": "ServiceTask-compensationReduceItem",
+      "Type": "ServiceTask",
+      "catch": {
+        "style": {
+          "bounds": {
+            "x": 412,
+            "y": 162,
+            "width": 36,
+            "height": 36
+          }
+        },
+        "edge": {
+          "CompensationTrigger-jykd7ys": {
+            "style": {
+              "waypoints": [
+                {
+                  "original": {
+                    "x": 448,
+                    "y": 180
+                  },
+                  "x": 448,
+                  "y": 180
+                },
+                {
+                  "x": 502,
+                  "y": 180
+                },
+                {
+                  "original": {
+                    "x": 522,
+                    "y": 180
+                  },
+                  "x": 522,
+                  "y": 180
+                }
+              ],
+              "source": "ServiceTask-ReduceItem",
+              "target": "CompensationTrigger-jykd7ys"
+            },
+            "Type": "ExceptionMatch"
+          }
+        }
+      },
+      "edge": {
+        "ServiceTask-compensationReduceItem": {
+          "style": {
+            "waypoints": [
+              {
+                "original": {
+                  "x": 330,
+                  "y": 150
+                },
+                "x": 330,
+                "y": 150
+              },
+              {
+                "x": 260,
+                "y": 150
+              },
+              {
+                "original": {
+                  "x": 240,
+                  "y": 150
+                },
+                "x": 240,
+                "y": 150
+              }
+            ],
+            "source": "ServiceTask-ReduceItem",
+            "target": "ServiceTask-compensationReduceItem"
+          },
+          "Type": "Compensation"
+        },
+        "ServiceTask-CreateOrder": {
+          "style": {
+            "waypoints": [
+              {
+                "original": {
+                  "x": 380,
+                  "y": 190
+                },
+                "x": 380,
+                "y": 190
+              },
+              {
+                "x": 380,
+                "y": 300
+              },
+              {
+                "original": {
+                  "x": 380,
+                  "y": 320
+                },
+                "x": 380,
+                "y": 320
+              }
+            ],
+            "source": "ServiceTask-ReduceItem",
+            "target": "ServiceTask-CreateOrder"
+          },
+          "Type": "Transition"
+        }
+      },
+      "Next": "ServiceTask-CreateOrder"
+    },
+    "Fail-1r9z2ce": {
+      "style": {
+        "bounds": {
+          "x": 522,
+          "y": 262,
+          "width": 36,
+          "height": 36
+        }
+      },
+      "Name": "Fail-1r9z2ce",
+      "ErrorCode": "1",
+      "Message": "PURCHASE_FAIL",
+      "Type": "Fail"
+    },
+    "ServiceTask-CreateOrder": {
+      "style": {
+        "bounds": {
+          "x": 330,
+          "y": 320,
+          "width": 100,
+          "height": 80
+        }
+      },
+      "Name": "ServiceTask-CreateOrder",
+      "IsForCompensation": false,
+      "Input": [
+        "$.[businessKey]",
+        "$.[userId]",
+        "$.[itemId]",
+        "$.[count]",
+        "$.#root"
+      ],
+      "Output": {},
+      "Status": {},
+      "Retry": [],
+      "ServiceName": "orderAction",
+      "ServiceMethod": "purchaseItem",
+      "Catch": [
+        {
+          "Exceptions": [
+            "java.lang.Throwable"
+          ],
+          "Next": "CompensationTrigger-gd1lu4g"
+        }
+      ],
+      "CompensateState": "ServiceTask-compensationCreateOrder",
+      "Type": "ServiceTask",
+      "catch": {
+        "style": {
+          "bounds": {
+            "x": 412,
+            "y": 382,
+            "width": 36,
+            "height": 36
+          }
+        },
+        "edge": {
+          "CompensationTrigger-gd1lu4g": {
+            "style": {
+              "waypoints": [
+                {
+                  "original": {
+                    "x": 448,
+                    "y": 400
+                  },
+                  "x": 448,
+                  "y": 400
+                },
+                {
+                  "x": 502,
+                  "y": 400
+                },
+                {
+                  "original": {
+                    "x": 522,
+                    "y": 400
+                  },
+                  "x": 522,
+                  "y": 400
+                },
+                {
+                  "original": {
+                    "x": 540,
+                    "y": 378
+                  },
+                  "x": 540,
+                  "y": 378
+                }
+              ],
+              "source": "ServiceTask-CreateOrder",
+              "target": "CompensationTrigger-gd1lu4g"
+            },
+            "Type": "ExceptionMatch"
+          }
+        }
+      },
+      "Next": "Succeed-fq6cmgu",
+      "edge": {
+        "Succeed-fq6cmgu": {
+          "style": {
+            "waypoints": [
+              {
+                "original": {
+                  "x": 380,
+                  "y": 400
+                },
+                "x": 380,
+                "y": 400
+              },
+              {
+                "x": 380,
+                "y": 422
+              },
+              {
+                "original": {
+                  "x": 380,
+                  "y": 442
+                },
+                "x": 380,
+                "y": 442
+              }
+            ],
+            "source": "ServiceTask-CreateOrder",
+            "target": "Succeed-fq6cmgu"
+          },
+          "Type": "Transition"
+        },
+        "ServiceTask-compensationCreateOrder": {
+          "style": {
+            "waypoints": [
+              {
+                "original": {
+                  "x": 330,
+                  "y": 360
+                },
+                "x": 330,
+                "y": 360
+              },
+              {
+                "x": 260,
+                "y": 360
+              },
+              {
+                "original": {
+                  "x": 240,
+                  "y": 360
+                },
+                "x": 240,
+                "y": 360
+              }
+            ],
+            "source": "ServiceTask-CreateOrder",
+            "target": "ServiceTask-compensationCreateOrder"
+          },
+          "Type": "Compensation"
+        }
+      }
+    },
+    "ServiceTask-compensationReduceItem": {
+      "style": {
+        "bounds": {
+          "x": 140,
+          "y": 110,
+          "width": 100,
+          "height": 80
+        }
+      },
+      "Name": "ServiceTask-compensationReduceItem",
+      "IsForCompensation": true,
+      "Input": [
+        "$.[businessKey]",
+        "$.[itemId]",
+        "$.[count]"
+      ],
+      "Output": {},
+      "Status": {},
+      "Retry": [],
+      "ServiceName": "itemAction",
+      "ServiceMethod": "compensateDecreaseStock",
+      "Type": "ServiceTask"
+    },
+    "ServiceTask-compensationCreateOrder": {
+      "style": {
+        "bounds": {
+          "x": 140,
+          "y": 320,
+          "width": 100,
+          "height": 80
+        }
+      },
+      "Name": "ServiceTask-compensationCreateOrder",
+      "IsForCompensation": true,
+      "Input": [
+        "$.[businessKey]",
+        "$.[userId]",
+        "$.[itemId]",
+        "$.[count]",
+        "$.#root"
+      ],
+      "Output": {},
+      "Status": {},
+      "Retry": [],
+      "ServiceName": "orderAction",
+      "ServiceMethod": "compensatePurchaseItem",
+      "Type": "ServiceTask"
+    },
+    "CompensationTrigger-gd1lu4g": {
+      "style": {
+        "bounds": {
+          "x": 522,
+          "y": 382,
+          "width": 36,
+          "height": 36
+        }
+      },
+      "Name": "CompensationTrigger-gd1lu4g",
+      "Type": "CompensationTrigger",
+      "Next": "Fail-1r9z2ce",
+      "edge": {
+        "Fail-1r9z2ce": {
+          "style": {
+            "waypoints": [
+              {
+                "original": {
+                  "x": 540,
+                  "y": 382
+                },
+                "x": 540,
+                "y": 382
+              },
+              {
+                "x": 540,
+                "y": 318
+              },
+              {
+                "original": {
+                  "x": 540,
+                  "y": 298
+                },
+                "x": 540,
+                "y": 298
+              }
+            ],
+            "source": "CompensationTrigger-gd1lu4g",
+            "target": "Fail-1r9z2ce"
+          },
+          "Type": "Transition"
+        }
+      }
+    },
+    "Succeed-fq6cmgu": {
+      "style": {
+        "bounds": {
+          "x": 362,
+          "y": 442,
+          "width": 36,
+          "height": 36
+        }
+      },
+      "Name": "Succeed-fq6cmgu",
+      "Type": "Succeed"
+    },
+    "CompensationTrigger-jykd7ys": {
+      "style": {
+        "bounds": {
+          "x": 522,
+          "y": 162,
+          "width": 36,
+          "height": 36
+        }
+      },
+      "Name": "CompensationTrigger-jykd7ys",
+      "Type": "CompensationTrigger",
+      "Next": "Fail-1r9z2ce",
+      "edge": {
+        "Fail-1r9z2ce": {
+          "style": {
+            "waypoints": [
+              {
+                "original": {
+                  "x": 540,
+                  "y": 198
+                },
+                "x": 540,
+                "y": 198
+              },
+              {
+                "x": 540,
+                "y": 242
+              },
+              {
+                "original": {
+                  "x": 540,
+                  "y": 262
+                },
+                "x": 540,
+                "y": 262
+              }
+            ],
+            "source": "CompensationTrigger-jykd7ys",
+            "target": "Fail-1r9z2ce"
+          },
+          "Type": "Transition"
+        }
+      }
+    }
+  },
+  "StartState": "ServiceTask-ReduceItem",
+  "edge": {
+    "style": {
+      "waypoints": [
+        {
+          "original": {
+            "x": 380,
+            "y": 78
+          },
+          "x": 380,
+          "y": 78
+        },
+        {
+          "x": 380,
+          "y": 90
+        },
+        {
+          "original": {
+            "x": 380,
+            "y": 110
+          },
+          "x": 380,
+          "y": 110
+        }
+      ],
+      "target": "ServiceTask-ReduceItem"
+    },
+    "Type": "Transition"
+  }
+}

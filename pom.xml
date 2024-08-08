@@ -27,6 +27,7 @@
         <module>tcc</module>
         <module>xa/xa-item</module>
         <module>xa/xa-business</module>
+        <module>saga</module>
     </modules>
     <scm>
         <connection/>
